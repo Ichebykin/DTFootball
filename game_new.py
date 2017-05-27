@@ -42,10 +42,7 @@ class Ball:
     def interact(self, other):
         if self is other:
             return
-        if ((self.x - other.x) ** 2 + (self.y - other.y) ** 2) ** 0.5 <= self.radius + other.radius:
-            self.vx = - self.vx
-            self.vy = - self.vy
-
+        
 
 ball = Ball(RED, 20, 400, 100, 0, 0)
 ball2 = Ball(GREEN, 30, 500, 130, 0, 0)
