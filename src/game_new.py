@@ -1,10 +1,14 @@
 import sys
-import copy
 import pygame
-from ball import *
+from ball import Ball
+from player import Player
+
+
+
+
 
 WIN_WIDTH = 800
-WIN_HEIGHT = 640 
+WIN_HEIGHT = 400 
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
 
 RED = (255, 0, 0)
@@ -15,28 +19,35 @@ Y_max = 600
 pygame.init()
 surface = pygame.display.set_mode(DISPLAY)
 clock = pygame.time.Clock()
+up = False
+right = False
+left = False
+
+ball = Ball(RED, 10, [580., 300.],[ 0., 0.])
+player = Player([580., 300.])
 
 
-ball1 = Ball(RED, 50, [580., 300.],[ 0., 0.])
-ball2 = Ball(RED, 50, [400., 300.],[ 0., 0.])
-balls = [ball1,ball2]
 dt = 0.01
 while True:
-    for event in pygame.event.get():
-        if event.type == 12:  # exit button
+    for e in pygame.event.get():
+        if e.type == 12:  # exit button
             pygame.display.quit()
             sys.exit()
-        if event.type == 5:
-            xc, yc = event.pos
-            for ball in balls:
-                ball.change_v(xc, yc)
-    surface.fill((0, 128, 0))
-    balls2 = copy.copy(balls)
-    for ball in balls:
-        ball.move(dt)
-        ball.draw(surface)
-        balls2.remove(ball)
-        for other_ball in balls2:
-            ball.interact(other_ball, surface)
-    clock.tick(60)
+       
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_UP:
+            up = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_LEFT:
+            left = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_RIGHT:
+            right = True
+        if e.type == pygame.KEYUP and e.key == pygame.K_UP:
+            up = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_RIGHT:
+            right = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
+            left = False
+    surface.fill((0, 0, 100))
+    ball.update(dt, surface)
+    player.update(left, right, up, surface)
+    clock.tick(200)
     pygame.display.update()
