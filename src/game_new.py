@@ -18,7 +18,7 @@ right = False
 left = False
 
 ball = Ball(10, [400., 200.], [ 10., 0.])
-player = Player([750., 280.])
+player = Player([720., 280.])
 
 
 dt = 0.01

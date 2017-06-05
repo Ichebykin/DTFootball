@@ -3,12 +3,11 @@ from pygame import sprite,image,Rect
 import numpy as np
 
 
-MOVE_SPEED = np.array([1.,0])
+MOVE_SPEED = 1
 WIDTH = 22
 HEIGHT = 32
-COLOR =  "#888888"
-JUMP_POWER = 10
-GRAVITY = np.array([0,0.35])
+JUMP_POWER = 2
+GRAVITY = 0.1
 
 class Player(sprite.Sprite):
     def __init__(self, r):
@@ -18,25 +17,45 @@ class Player(sprite.Sprite):
         self.onGround = False
         self.image = image.load('../data/image/mario/l1.png')
         self.rect = Rect(r[0],r[1], WIDTH, HEIGHT)
+        self.onGround = True
               
-
     def update(self, left, right, up, surface):
         
         if up:
             if self.onGround:
-                self.yvel = -JUMP_POWER
-        if left:
-            self.v = -MOVE_SPEED 
-        if right:
-            self.v = MOVE_SPEED 
+                self.v[1] = -JUMP_POWER
         if not self.onGround:
-            self.v +=  GRAVITY
-        self.draw(surface)   
-        self.rect.x += self.v[0]
+            self.v[1] +=  GRAVITY        
+        if left:
+            self.v[0] = -MOVE_SPEED
+            print(self.rect.x)  
+        if right:
+            self.v[0] = MOVE_SPEED
+            print(self.rect.x)  
+        
         if not(left or right):
-            self.v = (0.,0)
+            self.v[0] = 0
+        
+        self.collide(self.v)  
+        self.rect.x += self.v[0]
+        print(self.rect.y)
+        self.rect.y += self.v[1]
+           
+        self.draw(surface)     
     def draw(self,surface):
         surface.blit(self.image, (self.rect.x,self.rect.y))
     def collide(self, v):
-        return
+        nextx = self.rect.x + self.v[0]
+        if nextx<=60 or nextx>720:
+            self.v[0]=0
+        nexty = self.rect.y +self.v[1]   
+        if nexty<280:
+            self.onGround = False
+        if nexty>280:
+            self.onGround = True
+            self.rect.y = 280
+            self.v[1]=0
+    def kick(self, ball): 
+        return       
+                
        
