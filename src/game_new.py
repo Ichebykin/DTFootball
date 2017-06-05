@@ -2,32 +2,24 @@ import sys
 import pygame
 from ball import Ball
 from player import Player
-
-
-
-
-
+from pygame import image
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
 
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
 X_max = 800
 Y_max = 600
 pygame.init()
 surface = pygame.display.set_mode(DISPLAY)
+bg_image = image.load('../data/image/field.jpg').convert()
 clock = pygame.time.Clock()
 up = False
 right = False
 left = False
 
-ball = Ball(RED, 10, [580., 300.],[ 0., 0.])
-player = Player([580., 300.])
+ball = Ball([400., 200.], [ 10., 0.])
+player = Player([720., 280.])
 
-
-dt = 0.01
 while True:
     for e in pygame.event.get():
         if e.type == 12:  # exit button
@@ -46,8 +38,10 @@ while True:
             right = False
         if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
             left = False
-    surface.fill((0, 0, 100))
-    ball.update(dt, surface)
+    surface.blit(bg_image,(0,0))
+    ball.update(surface)
     player.update(left, right, up, surface)
-    clock.tick(200)
+    if pygame.sprite.collide_rect(ball,player):
+        ball.v = - ball.v
+    clock.tick(60)
     pygame.display.update()
