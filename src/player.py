@@ -38,7 +38,6 @@ class Player(sprite.Sprite):
         
         self.collide(self.v)  
         self.rect.x += self.v[0]
-        print(self.rect.y)
         self.rect.y += self.v[1]
            
         self.draw(surface)     
