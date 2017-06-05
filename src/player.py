@@ -3,11 +3,11 @@ from pygame import sprite,image,Rect
 import numpy as np
 
 
-MOVE_SPEED = 1
+MOVE_SPEED = 3
 WIDTH = 22
-HEIGHT = 32
-JUMP_POWER = 2
-GRAVITY = 0.1
+HEIGHT = 40
+JUMP_POWER = 6
+GRAVITY = 0.3
 
 class Player(sprite.Sprite):
     def __init__(self, r):
@@ -28,11 +28,9 @@ class Player(sprite.Sprite):
             self.v[1] +=  GRAVITY        
         if left:
             self.v[0] = -MOVE_SPEED
-            print(self.rect.x)  
         if right:
             self.v[0] = MOVE_SPEED
-            print(self.rect.x)  
-        
+            
         if not(left or right):
             self.v[0] = 0
         
@@ -40,7 +38,8 @@ class Player(sprite.Sprite):
         self.rect.x += self.v[0]
         self.rect.y += self.v[1]
            
-        self.draw(surface)     
+        self.draw(surface)
+          
     def draw(self,surface):
         surface.blit(self.image, (self.rect.x,self.rect.y))
     def collide(self, v):
