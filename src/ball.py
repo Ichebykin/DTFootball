@@ -1,23 +1,21 @@
 import math
 import numpy as np
 import numpy.linalg as la
-from pygame import Surface
-from pygame import draw
+from pygame import image,sprite
 
 g = np.array([0, 100.0])
 
-class Ball:
-    def __init__(self, color, radius, r, v):
+class Ball(sprite.Sprite):
+    def __init__(self, radius, r, v):
+        sprite.Sprite.__init__(self)
         self.m = 1.
-        self.color = color
+        self.color = (255, 0, 0)
         self.radius = radius
         self.r0 = np.array([self.radius,self.radius])
         self.r = np.array(r)
         self.v = np.array(v)
-        self.surface = Surface((2 * radius, 2 * radius)).convert_alpha()
-        self.surface.fill((0,0,0,0))
-        draw.circle(self.surface, color, (radius, radius), radius)
-    
+        self.image = image.load('../data/image/mach.png')
+        
     def update(self, dt, surface):
         size = surface.get_size()
         self.move(dt,size)
@@ -27,14 +25,14 @@ class Ball:
         self.v += g * dt/2
         self.r += self.v * dt
         self.v += g * dt / 2
-        if self.r[1] > size[1] - self.radius or self.r[1] < 0:
+        if self.r[1] > size[1]-100 or self.r[1] < 0:
             self.v[1] =  -self.v[1]
         if self.r[0] > size[0] - self.radius or self.r[0] < 0:
             self.v[0] = -self.v[0]
             
     def draw(self, surface):
         self.drawTrace(surface)
-        surface.blit(self.surface, self.r)
+        surface.blit(self.image, self.r)
 
     def change_v(self, xc, yc):
         self.v += [xc, yc] - self.r
