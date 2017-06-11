@@ -1,13 +1,13 @@
 
 from pygame import sprite,image,Rect
 import numpy as np
+from physics import Physics
 
-
-MOVE_SPEED = 3
+MOVE_SPEED = 30
 WIDTH = 22
 HEIGHT = 40
-JUMP_POWER = 6
-GRAVITY = 0.3
+JUMP_POWER = 30
+
 
 class Player(sprite.Sprite):
     def __init__(self, r):
@@ -20,39 +20,39 @@ class Player(sprite.Sprite):
         self.onGround = True
               
     def update(self, left, right, up, surface):
-        
+        dt = 0.1
         if up:
             if self.onGround:
                 self.v[1] = -JUMP_POWER
-        if not self.onGround:
-            self.v[1] +=  GRAVITY        
+                self.onGround = False
+        
         if left:
             self.v[0] = -MOVE_SPEED
+        
         if right:
             self.v[0] = MOVE_SPEED
             
         if not(left or right):
             self.v[0] = 0
         
-        self.collide(self.v)  
-        self.rect.x += self.v[0]
-        self.rect.y += self.v[1]
+        self.v += Physics.calc_dv(self.v, dt)
+        self.r +=  Physics.calc_dr(self.v, dt)
+        self.collide(self.r)  
+        self.rect.x = self.r[0]
+        self.rect.y = self.r[1]
            
         self.draw(surface)
           
     def draw(self,surface):
         surface.blit(self.image, (self.rect.x,self.rect.y))
-    def collide(self, v):
-        nextx = self.rect.x + self.v[0]
-        if nextx<=60 or nextx>720:
-            self.v[0]=0
-        nexty = self.rect.y +self.v[1]   
-        if nexty<280:
-            self.onGround = False
-        if nexty>280:
+    def collide(self, r):
+        if self.r[1]>280:
+            self.r[1]=280
             self.onGround = True
-            self.rect.y = 280
-            self.v[1]=0
+        if self.r[0]<60:
+            self.r[0]=60
+        if self.r[0]>720:
+            self.r[0]=720        
     def kick(self, ball): 
         return       
                 

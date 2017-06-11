@@ -2,6 +2,7 @@
 import numpy as np
 #import numpy.linalg as la
 from pygame import image,sprite,Rect
+from physics import Physics
 
 G = np.array([0, 500.0])
 radius = 25
@@ -16,11 +17,13 @@ class Ball(sprite.Sprite):
         self.rect = Rect(r[0],r[1], 20, 20)
         
     def update(self, surface):
-        dt = 0.01
+        dt = 0.1
         size = surface.get_size()
-        self.v += G * dt/2
-        self.r += self.v * dt
-        self.v += G * dt / 2
+        #self.v += G * dt/2
+        #self.r += self.v * dt
+        #self.v += G * dt / 2
+        self.r += Physics.calc_dr(self.v, dt)
+        self.v += Physics.calc_dv(self.v, dt)
         if self.r[1] > size[1]-100:
             self.v[1] =  -self.v[1]
         if self.r[0] > size[0] - radius or self.r[0] < 0:
