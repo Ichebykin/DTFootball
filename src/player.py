@@ -3,10 +3,10 @@ from pygame import sprite,image,Rect
 import numpy as np
 from physics import Physics
 
-MOVE_SPEED = 30
+MOVE_SPEED = 150
 WIDTH = 22
 HEIGHT = 40
-JUMP_POWER = 30
+JUMP_POWER = 200
 
 
 class Player(sprite.Sprite):
@@ -20,7 +20,7 @@ class Player(sprite.Sprite):
         self.onGround = True
               
     def update(self, left, right, up, surface):
-        dt = 0.1
+        
         if up:
             if self.onGround:
                 self.v[1] = -JUMP_POWER
@@ -35,8 +35,8 @@ class Player(sprite.Sprite):
         if not(left or right):
             self.v[0] = 0
         
-        self.v += Physics.calc_dv(self.v, dt)
-        self.r +=  Physics.calc_dr(self.v, dt)
+        self.v += Physics.calc_dv(self.v)
+        self.r +=  Physics.calc_dr(self.v)
         self.collide(self.r)  
         self.rect.x = self.r[0]
         self.rect.y = self.r[1]

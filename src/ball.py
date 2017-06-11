@@ -2,8 +2,8 @@ import numpy as np
 from pygame import image,sprite,Rect
 from physics import Physics
 
-G = np.array([0, 500.0])
 radius = 25
+
 class Ball(sprite.Sprite):
     def __init__(self, r, v):
         sprite.Sprite.__init__(self)
@@ -13,10 +13,9 @@ class Ball(sprite.Sprite):
         self.rect = Rect(r[0],r[1], 20, 20)
         
     def update(self, surface):
-        dt = 0.1
         size = surface.get_size()
-        self.r += Physics.calc_dr(self.v, dt)
-        self.v += Physics.calc_dv(self.v, dt)
+        self.r += Physics.calc_dr(self.v)
+        self.v += Physics.calc_dv(self.v)
         if self.r[1] > size[1]-100:
             self.v[1] =  -self.v[1]
             self.r[1] = size[1]-100

@@ -17,7 +17,7 @@ up = False
 right = False
 left = False
 
-ball = Ball([400., 200.], [ 10., 0.])
+ball = Ball([400., 200.], [ 0., 0.])
 player = Player([720., 280.])
 
 while True:
@@ -45,5 +45,5 @@ while True:
         ball.v = 2*player.v
     #print(player.v)
     #print(ball.v)
-    clock.tick(60)
+    clock.tick(120)
     pygame.display.update()
