@@ -41,8 +41,8 @@ while True:
     surface.blit(bg_image,(0,0))
     ball.update(surface)
     player.update(left, right, up, surface)
-    #if pygame.sprite.collide_rect(ball,player):
-        #ball.v = 100*player.v
+    if pygame.sprite.collide_rect(ball,player):
+        ball.v = 2*player.v
     #print(player.v)
     #print(ball.v)
     clock.tick(60)
