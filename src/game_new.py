@@ -18,7 +18,8 @@ right = False
 left = False
 
 ball = Ball([400., 200.], [ 0., 0.])
-player = Player([720., 280.])
+player1 = Player([720., 280.],1)
+player2 = Player([20,280.],1)
 
 while True:
     for e in pygame.event.get():
@@ -40,10 +41,11 @@ while True:
             left = False
     surface.blit(bg_image,(0,0))
     ball.update(surface)
-    player.update(left, right, up, surface)
-    if pygame.sprite.collide_rect(ball,player):
-        ball.v = -ball.v+1.5*player.v
-    #print(player.v)
-    print(player.v)
+    player1.update(left, right, up, surface)
+    player2.update(left, right, up, surface)
+    if pygame.sprite.collide_rect(ball,player1):
+        ball.v = -ball.v+1.5*player1.v
+    if pygame.sprite.collide_rect(ball,player2):
+        ball.v = -ball.v+1.5*player2.v    
     clock.tick(120)
     pygame.display.update()
