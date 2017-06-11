@@ -42,8 +42,8 @@ while True:
     ball.update(surface)
     player.update(left, right, up, surface)
     if pygame.sprite.collide_rect(ball,player):
-        ball.v = 2*player.v
+        ball.v = -ball.v+1.5*player.v
     #print(player.v)
-    #print(ball.v)
+    print(player.v)
     clock.tick(120)
     pygame.display.update()

@@ -12,6 +12,6 @@ class Physics:
         return(r)
     @staticmethod
     def calc_dv(v):
-        a = -0.5 * v
+        a = -0.5 * v 
         v = (G+a)*dt
         return(v)

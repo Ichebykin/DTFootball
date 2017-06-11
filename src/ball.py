@@ -16,18 +16,24 @@ class Ball(sprite.Sprite):
         size = surface.get_size()
         self.r += Physics.calc_dr(self.v)
         self.v += Physics.calc_dv(self.v)
-        if self.r[1] > size[1]-100:
+        self.collide(size)
+        self.rect.x = self.r[0]
+        self.rect.y = self.r[1]
+        self.draw(surface)
+    
+    def collide(self,size):
+        if self.r[1] > size[1]-106:
             self.v[1] =  -self.v[1]
-            self.r[1] = size[1]-100
+            if abs(self.v[1])<200:
+                self.v[1]=0
+            self.r[1] = size[1]-106
+            
         if self.r[0] > size[0] - radius:
             self.v[0] = -self.v[0]
             self.r[0] = size[0] - radius 
         if self.r[0] < 0:
             self.v[0] = -self.v[0]
             self.r[0] = 0     
-        self.rect.x = self.r[0]
-        self.rect.y = self.r[1]
-        self.draw(surface)
         
     def draw(self, surface):
         self.drawTrace(surface)

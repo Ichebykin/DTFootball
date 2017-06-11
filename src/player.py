@@ -48,6 +48,7 @@ class Player(sprite.Sprite):
     def collide(self, r):
         if self.r[1]>280:
             self.r[1]=280
+            self.v[1]=0
             self.onGround = True
         if self.r[0]<60:
             self.r[0]=60
