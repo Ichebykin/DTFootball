@@ -10,13 +10,13 @@ JUMP_POWER = 200
 
 
 class Player(sprite.Sprite):
-    def __init__(self, r, type):
+    def __init__(self, r, tp):
         sprite.Sprite.__init__(self)
         self.v = np.array([0.,0])
         self.r = np.array(r)
         self.onGround = False
-        if type == 1:
-            self.image = image.load('../data/image/mario/l1.png')
+        if tp == 1:
+            self.image = image.load('../data/image/mario/0.png')
         self.rect = Rect(r[0],r[1], WIDTH, HEIGHT)
         self.onGround = True
               
