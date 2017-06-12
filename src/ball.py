@@ -12,14 +12,14 @@ class Ball(sprite.Sprite):
         self.image = image.load('../data/image/mach.png')
         self.rect = Rect(r[0],r[1], 20, 20)
         
-    def update(self, surface):
-        size = surface.get_size()
+    def update(self, display):
+        size = display.get_size()
         self.r += Physics.calc_dr(self.v)
         self.v += Physics.calc_dv(self.v)
         self.collide(size)
         self.rect.x = self.r[0]
         self.rect.y = self.r[1]
-        self.draw(surface)
+        self.draw(display)
     
     def collide(self,size):
         if self.r[1] > size[1]-106:
@@ -35,9 +35,9 @@ class Ball(sprite.Sprite):
             self.v[0] = -self.v[0]
             self.r[0] = 0     
         
-    def draw(self, surface):
-        self.drawTrace(surface)
-        surface.blit(self.image, self.r)
+    def draw(self, display):
+        self.drawTrace(display)
+        display.blit(self.image, self.r)
 
-    def drawTrace(self,surface):
+    def drawTrace(self,display):
         return 

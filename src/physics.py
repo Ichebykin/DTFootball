@@ -8,10 +8,10 @@ class Physics:
         return
     @staticmethod
     def calc_dr(v):
-        r = v*dt+G*dt*dt/2
-        return(r)
+        dr = v*dt+G*dt*dt/2
+        return(dr)
     @staticmethod
     def calc_dv(v):
         a = -0.5 * v 
-        v = (G+a)*dt
-        return(v)
+        dv = (G+a)*dt
+        return(dv)
