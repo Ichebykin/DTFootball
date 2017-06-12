@@ -19,7 +19,7 @@ class Ball(sprite.Sprite):
         self.collide(size)
         self.rect.x = self.r[0]
         self.rect.y = self.r[1]
-        self.draw(display)
+        display.blit(self.image, self.r)
     
     def collide(self,size):
         if self.r[1] > size[1]-106:
@@ -35,9 +35,5 @@ class Ball(sprite.Sprite):
             self.v[0] = -self.v[0]
             self.r[0] = 0     
         
-    def draw(self, display):
-        self.drawTrace(display)
-        display.blit(self.image, self.r)
-
     def drawTrace(self,display):
         return 
