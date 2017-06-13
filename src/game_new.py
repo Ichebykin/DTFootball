@@ -24,6 +24,10 @@ left = False
 ball = Ball([400., 200.], [ 10., 0.])
 player = Player([720., 280.])
 
+cloud_effect1 = c_e([400., 200.])
+cloud_effect2 = c_e([400., 200.])
+cloud_effect3 = c_e([400., 200.])
+
 while True:
     for e in pygame.event.get():
         if e.type == 12:  # exit button
