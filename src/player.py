@@ -1,29 +1,25 @@
-
-from pygame import sprite,Rect,Surface,Color
+from pygame import sprite, Rect, Surface, Color
 import numpy as np
 from physics import Physics
-from animation import boltAnimJump,boltAnimLeft,boltAnimRight,boltAnimStay
+from animation import boltAnimJump, boltAnimLeft, boltAnimRight, boltAnimStay
 
 MOVE_SPEED = 150
 WIDTH = 22
 HEIGHT = 40
 JUMP_POWER = 200
-COLOR =  "#888888"
-
+COLOR = "#888888"
 
 class Player(sprite.Sprite):
     def __init__(self, r, pl_type):
         sprite.Sprite.__init__(self)
-        self.v = np.array([0.,0])
+        self.v = np.array([-100., 0])
         self.r = np.array(r)
-        self.image = Surface((WIDTH,HEIGHT))
+        self.image = Surface((WIDTH, HEIGHT))
         self.image.fill(Color(COLOR))
         self.image.set_colorkey(Color(COLOR))
-        self.rect = Rect(r[0],r[1], WIDTH, HEIGHT)
+        self.rect = Rect(r[0], r[1], WIDTH, HEIGHT)
         self.onGround = True
         
-        
-              
     def update(self, left, right, up, display):
         
         if up:
@@ -50,21 +46,21 @@ class Player(sprite.Sprite):
                 boltAnimStay.blit(self.image, (0, 0))
         
         self.v += Physics.calc_dv(self.v)
-        self.r +=  Physics.calc_dr(self.v)
+        self.r += Physics.calc_dr(self.v)
         self.collide()  
         self.rect.x = self.r[0]
         self.rect.y = self.r[1]
-        display.blit(self.image, (self.rect.x,self.rect.y))
+        display.blit(self.image, (self.rect.x, self.rect.y))
         
     def collide(self):
-        if self.r[1]>280:
-            self.r[1]=280
-            self.v[1]=0
+        if self.r[1] > 280:
+            self.r[1] = 280
+            self.v[1] = 0
             self.onGround = True
-        if self.r[0]<60:
-            self.r[0]=60
-        if self.r[0]>720:
-            self.r[0]=720        
+        if self.r[0] < 60:
+            self.r[0] = 60
+        if self.r[0] > 720:
+            self.r[0] = 720        
     def kick(self, ball): 
         return       
                 

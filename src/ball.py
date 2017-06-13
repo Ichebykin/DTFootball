@@ -1,5 +1,5 @@
 import numpy as np
-from pygame import image,sprite,Rect
+from pygame import image, sprite, Rect
 from physics import Physics
 
 radius = 25
@@ -10,7 +10,7 @@ class Ball(sprite.Sprite):
         self.r = np.array(r)
         self.v = np.array(v)
         self.image = image.load('../data/image/mach.png')
-        self.rect = Rect(r[0],r[1], 20, 20)
+        self.rect = Rect(r[0], r[1], 20, 20)
         
     def update(self, display):
         size = display.get_size()
@@ -21,12 +21,12 @@ class Ball(sprite.Sprite):
         self.rect.y = self.r[1]
         display.blit(self.image, self.r)
     
-    def collide(self,size):
-        if self.r[1] > size[1]-106:
-            self.v[1] =  -self.v[1]
-            if abs(self.v[1])<200:
-                self.v[1]=0
-            self.r[1] = size[1]-106
+    def collide(self, size):
+        if self.r[1] > size[1] - 106:
+            self.v[1] = -self.v[1]
+            if abs(self.v[1]) < 200:
+                self.v[1] = 0
+            self.r[1] = size[1] - 106
             
         if self.r[0] > size[0] - radius:
             self.v[0] = -self.v[0]
@@ -35,5 +35,5 @@ class Ball(sprite.Sprite):
             self.v[0] = -self.v[0]
             self.r[0] = 0     
         
-    def drawTrace(self,display):
+    def drawTrace(self, display):
         return 

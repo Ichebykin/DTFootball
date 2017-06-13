@@ -15,11 +15,11 @@ up1 = False
 right1 = False
 left1 = False
 up2 = False
-right2= False
+right2 = False
 left2 = False
 ball = Ball([400., 200.], [ 0., 0.])
-player1 = Player([720., 280.],1)
-player2 = Player([20,280.],1)
+player1 = Player([450., 280.], 1)
+player2 = Player([20, 280.], 1)
 
 while True:
     for e in pygame.event.get():
@@ -53,14 +53,17 @@ while True:
             left1 = False
         if e.key == pygame.K_a:
             left2 = False    
-    display.blit(bg_image,(0,0))
+    display.blit(bg_image, (0, 0))
     ball.update(display)
     player1.update(left1, right1, up1, display)
     player2.update(left2, right2, up2, display)
     
-    if pygame.sprite.collide_rect(ball,player1):
-        ball.v = -ball.v+1.5*player1.v
-    if pygame.sprite.collide_rect(ball,player2):
-        ball.v = -ball.v+1.5*player2.v    
+    if pygame.sprite.collide_rect(ball, player1):
+        print('ball v = ',ball.v)
+        print('player v = ',player1.v)
+        ball.v = -ball.v + 2*player1.v
+        print('new ball v = ', ball.v)
+    if pygame.sprite.collide_rect(ball, player2):
+        ball.v = - ball.v + 2*player2.v    
     clock.tick(120)
     pygame.display.update()
