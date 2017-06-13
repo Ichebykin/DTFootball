@@ -3,6 +3,10 @@ import pygame
 from ball import Ball
 from player import Player
 from pygame import image
+
+import copy
+from effects.cloud import cloud_effect as c_e
+
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
@@ -39,7 +43,17 @@ while True:
         if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
             left = False
     surface.blit(bg_image,(0,0))
+    
+    cloud_effect1.update(display)
+    cloud_effect2.update(display)
+    cloud_effect3.update(display)
+    
     ball.update(surface)
+    
+    cloud_effect3.r=copy.copy(cloud_effect2.r)
+    cloud_effect2.r=copy.copy(cloud_effect1.r)
+    cloud_effect1.r=copy.copy(ball.r)
+
     player.update(left, right, up, surface)
     if pygame.sprite.collide_rect(ball,player):
         ball.v = - ball.v
