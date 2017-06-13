@@ -3,6 +3,7 @@ import pygame
 from ball import Ball
 from player import Player
 from pygame import image
+from physics import Physics
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
@@ -61,7 +62,7 @@ while True:
     if pygame.sprite.collide_rect(ball, player1):
         print('ball v = ',ball.v)
         print('player v = ',player1.v)
-        ball.v = -ball.v + 2*player1.v
+        Physics.interact(ball, player1)
         print('new ball v = ', ball.v)
     if pygame.sprite.collide_rect(ball, player2):
         ball.v = - ball.v + 2*player2.v    
