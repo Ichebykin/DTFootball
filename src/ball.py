@@ -2,7 +2,7 @@ import numpy as np
 from pygame import image, sprite, Rect
 from physics import Physics
 
-radius = 25
+radius = 10
 
 class Ball(sprite.Sprite):
     def __init__(self, r, v):
