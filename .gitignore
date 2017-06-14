@@ -1,3 +1,5 @@
 /.project
 /.pydevproject
 /src/__pycache__
+/.settings
+/src/Effects/__pycache__
