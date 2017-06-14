@@ -21,6 +21,8 @@ class Physics:
     def interact(ball,player):
         v = ball.v - player.v
         r = player.r - ball.r
+        r[0]+=1#width correction
+        r[1]+=9
         tau = np.array([-r[1], r[0]])
         alpha = math.acos(np.dot(v, r) / la.norm(v) / la.norm(r))
         v_r = la.norm(v) * math.cos(alpha) * r / la.norm(r)
@@ -28,5 +30,4 @@ class Physics:
         if np.dot(v, tau)<0:
             v_tau = - v_tau
         ball.v = v_tau + player.v - 0.5*v_r
-        #player.v =player.v
-        #player.r = ball.r + r/la.norm(r)*(ball.radius+player.radius)
+        ball.r = ball.r - r/la.norm(r)*2

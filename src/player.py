@@ -3,9 +3,9 @@ import numpy as np
 from physics import Physics
 from animation import boltAnimJump, boltAnimLeft, boltAnimRight, boltAnimStay
 
-MOVE_SPEED = 150
+MOVE_SPEED = 200
 WIDTH = 22
-HEIGHT = 40
+HEIGHT = 37
 JUMP_POWER = 200
 COLOR = "#888888"
 
@@ -61,7 +61,5 @@ class Player(sprite.Sprite):
             self.r[0] = 60
         if self.r[0] > 720:
             self.r[0] = 720        
-    def kick(self, ball): 
-        return       
                 
        
