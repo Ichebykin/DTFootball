@@ -2,6 +2,7 @@ from pygame import sprite, Rect, Surface, Color
 import numpy as np
 from physics import Physics
 from animation import boltAnimJump, boltAnimLeft, boltAnimRight, boltAnimStay
+import numpy.linalg as la
 
 MOVE_SPEED = 200
 WIDTH = 22
@@ -60,6 +61,15 @@ class Player(sprite.Sprite):
         if self.r[0] < 60:
             self.r[0] = 60
         if self.r[0] > 720:
-            self.r[0] = 720        
+            self.r[0] = 720
+    
+    def kick(self,ball):
+        if la.norm(self.r - ball.r)< 30:
+            v_x = -50
+            print(self.r[0] - ball.r[0])
+            if (self.r[0] - ball.r[0])<0:
+                v_x = - v_x
+              
+            ball.v = ball.v + np.array([v_x, -50.])                
                 
        

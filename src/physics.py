@@ -29,5 +29,5 @@ class Physics:
         v_tau = la.norm(v) * math.sin(alpha) * tau / la.norm(tau)
         if np.dot(v, tau)<0:
             v_tau = - v_tau
-        ball.v = v_tau + player.v - 0.5*v_r
-        ball.r = ball.r - r/la.norm(r)*2
+        ball.v = v_tau + player.v - 0.2*v_r
+        ball.r = ball.r - r/la.norm(r)*3
