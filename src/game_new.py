@@ -5,7 +5,7 @@ from player import Player
 from pygame import image
 from physics import Physics
 import copy
-#from Effects.cloud import Cloud_effect as c_e
+from Effects.cloud import Cloud_effect as c_e
 
 
 WIN_WIDTH = 800
@@ -28,9 +28,9 @@ ball = Ball([400., 200.], [ 0., 0.])
 player1 = Player([450., 280.], 1)
 player2 = Player([20, 280.], 1)
 
-#cloud_effect1 = c_e([400., 200.])
-#cloud_effect2 = c_e([400., 200.])
-#cloud_effect3 = c_e([400., 200.])
+cloud_effect1 = c_e([400., 200.])
+cloud_effect2 = c_e([400., 200.])
+cloud_effect3 = c_e([400., 200.])
 
 while True:
     for e in pygame.event.get():
@@ -69,17 +69,17 @@ while True:
         kick1 = True 
     display.blit(bg_image, (0, 0))
 
-    #cloud_effect1.update(display)
-    #cloud_effect2.update(display)
-    #cloud_effect3.update(display)
+    cloud_effect1.update(display)
+    cloud_effect2.update(display)
+    cloud_effect3.update(display)
 
     ball.update(display)
     player1.update(left1, right1, up1, display)
     player2.update(left2, right2, up2, display)
 
-    #cloud_effect3.r=copy.copy(cloud_effect2.r)
-    #cloud_effect2.r=copy.copy(cloud_effect1.r)
-    #cloud_effect1.r=copy.copy(ball.r)
+    cloud_effect3.r=copy.copy(cloud_effect2.r)
+    cloud_effect2.r=copy.copy(cloud_effect1.r)
+    cloud_effect1.r=copy.copy(ball.r)
 
     if pygame.sprite.collide_rect(ball, player1):
         Physics.interact(ball, player1)

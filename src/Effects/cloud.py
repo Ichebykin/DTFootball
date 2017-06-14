@@ -2,7 +2,7 @@ import numpy as np
 from pygame import image, sprite, Rect
 from physics import Physics
 
-class cloud_effect(sprite.Sprite):
+class Cloud_effect(sprite.Sprite):
 	"""docstring for cloud_effect """
 	def __init__(self, r):
 		sprite.Sprite.__init__(self)
