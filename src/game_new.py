@@ -62,11 +62,11 @@ while True:
         left1 = False
     if e.type == pygame.KEYUP and e.key == pygame.K_a:
         left2 = False  
-        
     if e.type == pygame.KEYDOWN and e.key == pygame.K_LSHIFT:
         kick2 = True
     if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
         kick1 = True 
+    
     display.blit(bg_image, (0, 0))
 
     cloud_effect1.update(display)
