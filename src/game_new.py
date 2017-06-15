@@ -2,16 +2,16 @@ import sys
 import pygame
 from ball import Ball
 from player import Player
-from pygame import image, time
+from pygame import image
 from physics import Physics
 import copy
-from Effects.cloud import Cloud_effect as c_e
+from Effects.cloud import Cloud_effect
 from Parts.Scoreboard import Scoreboard
+
 
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
-
 
 pygame.init()
 display = pygame.display.set_mode(DISPLAY)
@@ -46,44 +46,43 @@ player2 = Player(Startpoint_player_team2, 1)
 
 scoreboard = Scoreboard([0, 0])
 
-cloud_effect1 = c_e(Startpoint_Ball)
-cloud_effect2 = c_e(Startpoint_Ball)
-cloud_effect3 = c_e(Startpoint_Ball)
+cloud_effect1 = Cloud_effect([400., 200.])
+cloud_effect2 = Cloud_effect([400., 200.])
+cloud_effect3 = Cloud_effect([400., 200.])
 
 while True:
     for e in pygame.event.get():
         if e.type == 12:  # exit button
             pygame.display.quit()
             sys.exit()
-       
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_UP:
-        up1 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_w:
-        up2 = True    
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_LEFT:
-        left1 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
-        left2 = True    
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_RIGHT:
-        right1 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_d:
-        right2 = True    
-    if e.type == pygame.KEYUP and e.key == pygame.K_UP:
-        up1 = False
-    if e.type == pygame.KEYUP and e.key == pygame.K_w:
-        up2 = False        
-    if e.type == pygame.KEYUP and e.key == pygame.K_RIGHT:
-        right1 = False
-    if e.type == pygame.KEYUP and e.key == pygame.K_d:
-        right2 = False     
-    if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
-        left1 = False
-    if e.type == pygame.KEYUP and e.key == pygame.K_a:
-        left2 = False  
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_LSHIFT:
-        kick2 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
-        kick1 = True 
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_UP:
+            up1 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_w:
+            up2 = True    
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_LEFT:
+            left1 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
+            left2 = True    
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_RIGHT:
+            right1 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_d:
+            right2 = True    
+        if e.type == pygame.KEYUP and e.key == pygame.K_UP:
+            up1 = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_w:
+            up2 = False        
+        if e.type == pygame.KEYUP and e.key == pygame.K_RIGHT:
+            right1 = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_d:
+            right2 = False     
+        if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
+            left1 = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_a:
+            left2 = False  
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_LSHIFT:
+            kick2 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
+            kick1 = True
 
 
     if ball.r[0] <= 45 and ball.r[1]>=190:
@@ -100,8 +99,7 @@ while True:
         player1.r = Startpoint_player_team1
         player2.r = Startpoint_player_team2
         pygame.time.delay(1000)
-
-
+    
     display.blit(bg_image, (0, 0))
 
     cloud_effect1.update(display)
@@ -126,9 +124,9 @@ while True:
     if kick2:
         player2.kick(ball)    
     kick1 = False
-    kick2 = False
+    kick2 = False   
 
     scoreboard.update(display)
-
+          
     clock.tick(120)
     pygame.display.update()
