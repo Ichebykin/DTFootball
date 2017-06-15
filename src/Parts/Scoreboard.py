@@ -9,12 +9,10 @@ class Scoreboard(sprite.Sprite):
 		self.font = pygame.font.Font(None, 25)
 
 	def goal_team1(self):
-		self.goalcounter[0] =+ 1
-		print(self.goalcounter)
+		self.goalcounter[0] += 1
 
 	def goal_team2(self):
-		self.goalcounter[1] =+ 1
-		print(self.goalcounter)
+		self.goalcounter[1] += 1
 
 	def update(self,display):
 		size = display.get_size()
