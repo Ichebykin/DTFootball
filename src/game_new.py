@@ -8,7 +8,6 @@ import copy
 from Effects.cloud import Cloud_effect
 from Parts.Scoreboard import Scoreboard
 
-
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
@@ -82,11 +81,11 @@ while True:
         if e.type == pygame.KEYDOWN and e.key == pygame.K_LSHIFT:
             kick2 = True
         if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
-            kick1 = True
+            kick1 = True 
 
 
     if ball.r[0] <= 45 and ball.r[1]>=190:
-        scoreboard.goal_team1()
+        scoreboard.goal_team2()
         ball = Ball(Startpoint_Ball, [ 0., 0.])
         player1.r = Startpoint_player_team1
         player2.r = Startpoint_player_team2
@@ -94,12 +93,12 @@ while True:
 
 
     if ball.r[0] >= 744 and ball.r[1]>=190:
-        scoreboard.goal_team2()
+        scoreboard.goal_team1()
         ball = Ball(Startpoint_Ball, [ 0., 0.])
         player1.r = Startpoint_player_team1
         player2.r = Startpoint_player_team2
         pygame.time.delay(1000)
-    
+
     display.blit(bg_image, (0, 0))
 
     cloud_effect1.update(display)
@@ -124,9 +123,7 @@ while True:
     if kick2:
         player2.kick(ball)    
     kick1 = False
-    kick2 = False   
-
-    scoreboard.update(display)
-          
+    kick2 = False
+    scoreboard.update(display)      
     clock.tick(120)
     pygame.display.update()
