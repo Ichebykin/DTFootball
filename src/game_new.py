@@ -7,7 +7,6 @@ from physics import Physics
 import copy
 from Effects.cloud import Cloud_effect as c_e
 from Parts.Scoreboard import Scoreboard
-from Parts.Atstart import AtStart
 
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
