@@ -6,6 +6,7 @@ from pygame import image, time
 from physics import Physics
 import copy
 from Effects.cloud import Cloud_effect as c_e
+# from Effects.goalcounter import Scoreboard
 
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
@@ -93,7 +94,6 @@ while True:
     	ball = Ball([Startpoint_Ball_x, Startpoint_Ball_y], [ 0., 0.])
     	player1.r = [Startpoint_player_team1_x , Startpoint_player_team1_y]
     	player2.r = [Startpoint_player_team2_x, Startpoint_player_team2_y]
-    	print(goalcounter)
     	pygame.time.delay(1000)
 
 
@@ -102,7 +102,6 @@ while True:
     	ball = Ball([Startpoint_Ball_x, Startpoint_Ball_y], [ 0., 0.])
     	player1.r = [Startpoint_player_team1_x , Startpoint_player_team1_y]
     	player2.r = [Startpoint_player_team2_x, Startpoint_player_team2_y]
-    	print(goalcounter)
     	pygame.time.delay(1000)
 
 
@@ -130,6 +129,11 @@ while True:
     if kick2:
         player2.kick(ball)    
     kick1 = False
-    kick2 = False         
+    kick2 = False
+
+    font = pygame.font.Font(None, 25)
+    text = font.render("Счет: %i - %i" % (goalcounter[0], goalcounter[1]), True, [0, 0, 0])
+    display.blit(text, [0, 0] )
+    # Scoreboard(goalcounter)         
     clock.tick(120)
     pygame.display.update()
