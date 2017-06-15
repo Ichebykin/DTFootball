@@ -99,6 +99,12 @@ class PresentScene(lib.Scene):
 		self.display.fill((255, 255, 255))
 		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(),self.sprite.get_rect()))
 
+class HidePresentScene(PresentScene):
+	def _start(self):
+		PresentScene._start(self)
+		self.football.toggle()
+		self.football.set_time(1000)
+
 class PresentDFScene(lib.Scene):
 	def _start(self):
 		self.sprite = self.manager.get_image('PresentDF.png')
@@ -126,7 +132,7 @@ class PresentDFScene(lib.Scene):
 	def _draw(self, dt):
 		self.display.fill((255, 255, 255))
 		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(),self.sprite.get_rect()))
-		#time.sleep(5)
+		#ime.sleep(5)
 		self.display.blit(self.football.get_sprite(self.sprite2), get_center(self.display.get_rect(),self.sprite2.get_rect()))
 
 class Menu:
@@ -214,7 +220,7 @@ class MenuScene(lib.Scene):
 		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(),self.sprite.get_rect()))
 
 if __name__ == '__main__':
-	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, PresentDFScene(WaitScene(1000,MenuScene())))))))))
+	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000,MenuScene())))))))))))
 	game = lib.Game(640, 480, scene=scene)
 	game.set_caption("Dream Football", "icon2.png")
 	game.game_loop()
