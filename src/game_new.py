@@ -5,7 +5,7 @@ from player import Player
 from pygame import image
 from physics import Physics
 import copy
-from Effects.cloud import Cloud_effect as c_e
+from Effects.cloud import Cloud_effect
 
 
 WIN_WIDTH = 800
@@ -28,44 +28,43 @@ ball = Ball([400., 200.], [ 0., 0.])
 player1 = Player([450., 280.], 1)
 player2 = Player([20, 280.], 1)
 
-cloud_effect1 = c_e([400., 200.])
-cloud_effect2 = c_e([400., 200.])
-cloud_effect3 = c_e([400., 200.])
+cloud_effect1 = Cloud_effect([400., 200.])
+cloud_effect2 = Cloud_effect([400., 200.])
+cloud_effect3 = Cloud_effect([400., 200.])
 
 while True:
     for e in pygame.event.get():
         if e.type == 12:  # exit button
             pygame.display.quit()
             sys.exit()
-       
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_UP:
-        up1 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_w:
-        up2 = True    
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_LEFT:
-        left1 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
-        left2 = True    
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_RIGHT:
-        right1 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_d:
-        right2 = True    
-    if e.type == pygame.KEYUP and e.key == pygame.K_UP:
-        up1 = False
-    if e.type == pygame.KEYUP and e.key == pygame.K_w:
-        up2 = False        
-    if e.type == pygame.KEYUP and e.key == pygame.K_RIGHT:
-        right1 = False
-    if e.type == pygame.KEYUP and e.key == pygame.K_d:
-        right2 = False     
-    if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
-        left1 = False
-    if e.type == pygame.KEYUP and e.key == pygame.K_a:
-        left2 = False  
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_LSHIFT:
-        kick2 = True
-    if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
-        kick1 = True 
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_UP:
+            up1 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_w:
+            up2 = True    
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_LEFT:
+            left1 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
+            left2 = True    
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_RIGHT:
+            right1 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_d:
+            right2 = True    
+        if e.type == pygame.KEYUP and e.key == pygame.K_UP:
+            up1 = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_w:
+            up2 = False        
+        if e.type == pygame.KEYUP and e.key == pygame.K_RIGHT:
+            right1 = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_d:
+            right2 = False     
+        if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
+            left1 = False
+        if e.type == pygame.KEYUP and e.key == pygame.K_a:
+            left2 = False  
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_LSHIFT:
+            kick2 = True
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
+            kick1 = True 
     
     display.blit(bg_image, (0, 0))
 
