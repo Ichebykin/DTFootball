@@ -7,6 +7,7 @@ from physics import Physics
 import copy
 from Effects.cloud import Cloud_effect
 from Parts.Scoreboard import Scoreboard
+from Parts.Countdown_timer import Countdown_timer
 
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
@@ -25,7 +26,9 @@ left2 = False
 kick1 = False
 kick2 = False
 
+Match = 60000 * 1 # 1 minute in milliseconds
 
+countdown_timer = Countdown_timer(Match)
 
 Startpoint_Ball = [400., 200.]
 
@@ -49,7 +52,9 @@ cloud_effect1 = Cloud_effect([400., 200.])
 cloud_effect2 = Cloud_effect([400., 200.])
 cloud_effect3 = Cloud_effect([400., 200.])
 
-while True:
+
+
+while pygame.time.get_ticks()<=Match:
     for e in pygame.event.get():
         if e.type == 12:  # exit button
             pygame.display.quit()
@@ -124,6 +129,10 @@ while True:
         player2.kick(ball)    
     kick1 = False
     kick2 = False
-    scoreboard.update(display)      
+
+    scoreboard.update(display)
+    countdown_timer.update(display)
+
     clock.tick(120)
+    print(pygame.time.get_ticks())
     pygame.display.update()
