@@ -2,15 +2,15 @@ import sys
 import pygame
 from ball import Ball
 from player import Player
-from pygame import image
+from pygame import image, time
 from physics import Physics
 import copy
 from Effects.cloud import Cloud_effect as c_e
 
-
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
+
 
 pygame.init()
 display = pygame.display.set_mode(DISPLAY)
@@ -24,13 +24,33 @@ right2 = False
 left2 = False
 kick1 = False
 kick2 = False
-ball = Ball([400., 200.], [ 0., 0.])
-player1 = Player([450., 280.], 1)
-player2 = Player([20, 280.], 1)
 
-cloud_effect1 = c_e([400., 200.])
-cloud_effect2 = c_e([400., 200.])
-cloud_effect3 = c_e([400., 200.])
+
+
+Startpoint_Ball_x = 400.
+Startpoint_Ball_y = 200.
+
+ball = Ball([Startpoint_Ball_x, Startpoint_Ball_y], [ 0., 0.])
+
+
+
+Startpoint_player_team1_x = 450.
+Startpoint_player_team1_y = 280.
+
+player1 = Player([Startpoint_player_team1_x , Startpoint_player_team1_y], 1)
+
+
+
+Startpoint_player_team2_x = 20.
+Startpoint_player_team2_y = 280.
+
+player2 = Player([Startpoint_player_team2_x, Startpoint_player_team2_y], 1)
+
+goalcounter = [0, 0]
+
+cloud_effect1 = c_e([Startpoint_Ball_x, Startpoint_Ball_y])
+cloud_effect2 = c_e([Startpoint_Ball_x, Startpoint_Ball_y])
+cloud_effect3 = c_e([Startpoint_Ball_x, Startpoint_Ball_y])
 
 while True:
     for e in pygame.event.get():
@@ -66,7 +86,26 @@ while True:
         kick2 = True
     if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
         kick1 = True 
-    
+
+
+    if ball.r[0] <= 45 and ball.r[1]>=190:
+    	goalcounter[0] += 1
+    	ball = Ball([Startpoint_Ball_x, Startpoint_Ball_y], [ 0., 0.])
+    	player1.r = [Startpoint_player_team1_x , Startpoint_player_team1_y]
+    	player2.r = [Startpoint_player_team2_x, Startpoint_player_team2_y]
+    	print(goalcounter)
+    	pygame.time.delay(1000)
+
+
+    if ball.r[0] >= 744 and ball.r[1]>=190:
+    	goalcounter[1] += 1
+    	ball = Ball([Startpoint_Ball_x, Startpoint_Ball_y], [ 0., 0.])
+    	player1.r = [Startpoint_player_team1_x , Startpoint_player_team1_y]
+    	player2.r = [Startpoint_player_team2_x, Startpoint_player_team2_y]
+    	print(goalcounter)
+    	pygame.time.delay(1000)
+
+
     display.blit(bg_image, (0, 0))
 
     cloud_effect1.update(display)
