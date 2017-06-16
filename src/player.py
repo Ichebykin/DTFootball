@@ -7,7 +7,7 @@ import numpy.linalg as la
 MOVE_SPEED = 200
 WIDTH = 22
 HEIGHT = 37
-JUMP_POWER = 200
+JUMP_POWER = 220
 COLOR = "#888888"
 
 class Player(sprite.Sprite):

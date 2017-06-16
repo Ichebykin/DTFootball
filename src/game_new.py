@@ -26,7 +26,7 @@ left2 = False
 kick1 = False
 kick2 = False
 
-Match = 60000 * 1 # 1 minute in milliseconds
+Match = 60000 * 1.5 # 1 minute in milliseconds
 
 countdown_timer = Countdown_timer(Match)
 
@@ -36,7 +36,7 @@ ball = Ball(Startpoint_Ball, [ 0., 0.])
 
 
 
-Startpoint_player_team1 = [450., 280.]
+Startpoint_player_team1 = [780., 280.]
 
 player1 = Player(Startpoint_player_team1, 1)
 

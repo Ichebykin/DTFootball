@@ -27,7 +27,7 @@ def play_music(music_file):
 	#     print("playing")
 	#     pass
 
-play_music('music/Wavin_Flag.mp3')
+play_music('../data/music/Wavin Flag.mp3')
 
 def get_center(surface, sprite):
 	return(surface.w/2 - sprite.w/2, surface.h/2 - sprite.h/2)
@@ -132,7 +132,7 @@ class PresentDFScene(lib.Scene):
 	def _draw(self, dt):
 		self.display.fill((255, 255, 255))
 		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(),self.sprite.get_rect()))
-		#ime.sleep(5)
+		#time.sleep(5)
 		self.display.blit(self.football.get_sprite(self.sprite2), get_center(self.display.get_rect(),self.sprite2.get_rect()))
 
 class Menu:
@@ -171,13 +171,40 @@ class Menu:
 				y += item['no select'].get_rect().h
 			index += 1
 
+class AboutScene(lib.Scene):
+	def _start(self):
+		self.sprite = self.manager.get_image('aboutScene.png')
+		self.football = lib.Transparent(3000)
+		self.football.start()
+
+	def _event(self, event):
+		for e in event.get():
+			if e.type == pygame.KEYDOWN:
+				self.the_end()
+				self.set_next_scene(PresentDFScene())
+
+		if not self.football.is_start():
+			self.the_end()
+
+	def _update(self, dt):
+		self.football.update(dt)
+
+	def _draw(self, dt):
+		self.display.fill((255, 255, 255))
+		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(),self.sprite.get_rect()))
+
 class MenuScene(lib.Scene):
 	def item_call(self):
 		print("item_call")
 		self.the_end()
 
+	def about_call(self):
+		self.set_next_scene(AboutScene())
+		self.the_end()
+
 	def _start(self):
 		self.sprite = self.manager.get_image('PresentDF.png')
+		self.sprite2 = self.manager.get_image('aboutGame.png')
 		self.football = lib.Transparent(3000)
 		self.football.start()
 		self.menu = Menu((330,200))
@@ -198,7 +225,7 @@ class MenuScene(lib.Scene):
 		item = u"Об игре"
 		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
 								font_bold.render(item,True,(0,0,0)),
-								self.item_call)
+								self.about_call)
 		item = u"Выход"
 		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
 								font_bold.render(item,True,(0,0,0)),
@@ -220,7 +247,8 @@ class MenuScene(lib.Scene):
 		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(),self.sprite.get_rect()))
 
 if __name__ == '__main__':
-	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000,MenuScene())))))))))))
+	#scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000,MenuScene())))))))))))
+	scene = WaitScene(1000, ShowScene())
 	game = lib.Game(640, 480, scene=scene)
 	game.set_caption("Dream Football", "icon2.png")
 	game.game_loop()
