@@ -1,7 +1,6 @@
 from pygame import sprite, Rect, Surface, Color
 import numpy as np
-from physics import Physics
-from animation import boltAnimJump, boltAnimLeft, boltAnimRight, boltAnimStay
+from lib.animation import *
 import numpy.linalg as la
 
 MOVE_SPEED = 200
@@ -46,8 +45,8 @@ class Player(sprite.Sprite):
                 self.image.fill(Color(COLOR))
                 boltAnimStay.blit(self.image, (0, 0))
         
-        self.v += Physics.calc_dv(self.v)
-        self.r += Physics.calc_dr(self.v)
+        self.v += lib.Physics.calc_dv(self.v)
+        self.r += lib.Physics.calc_dr(self.v)
         self.collide()  
         self.rect.x = self.r[0]
         self.rect.y = self.r[1]

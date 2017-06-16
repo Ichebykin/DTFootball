@@ -1,6 +1,6 @@
 import pygame
 import lib
-from game_scene import GameScene
+import Scenes
 
 pygame.init()
 
@@ -184,7 +184,7 @@ class MenuScene(lib.Scene):
 		print("item_call")
 		self.the_end()
 	def game_call(self):
-		self.set_next_scene(GameScene(MenuScene()))
+		self.set_next_scene(Scenes.GameScene(MenuScene()))
 		self.the_end()
 	def about_call(self):
 		self.set_next_scene(AboutScene(MenuScene()))

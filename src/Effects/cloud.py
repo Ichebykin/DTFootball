@@ -1,6 +1,4 @@
-import numpy as np
 from pygame import image, sprite, Rect
-from physics import Physics
 
 class Cloud_effect(sprite.Sprite):
 	"""docstring for cloud_effect """

@@ -1,6 +1,6 @@
 import pygame
 from pygame import image
-from physics import Physics
+
 import copy
 import Effects
 import Parts
@@ -103,9 +103,9 @@ class GameScene(lib.Scene):
 		cloud_effect3.update(self.display)
 		self.ball.update(self.display)
 		if pygame.sprite.collide_rect(self.ball, self.player1):
-			Physics.interact(self.ball, self.player1)
+			lib.Physics.interact(self.ball, self.player1)
 		if pygame.sprite.collide_rect(self.ball, self.player2):
-			Physics.interact(self.ball, self.player2)
+			lib.Physics.interact(self.ball, self.player2)
 		if move1[3]:
 			self.player1.kick(self.ball)
 		if move2[3]:

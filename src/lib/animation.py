@@ -1,5 +1,4 @@
-import pyganim
-
+import lib.pyganim
 ICON_DIR = '../data/image/boy2'
 #class animation():
 #    def __init__(self,Idir):
@@ -27,20 +26,20 @@ ANIMATION_STAY = [('%s/frame-I1.png' % ICON_DIR),
 boltAnim = []
 for anim in ANIMATION_RIGHT:
     boltAnim.append((anim, ANIMATION_DELAY))
-boltAnimRight = pyganim.PygAnimation(boltAnim)
+boltAnimRight = lib.pyganim.PygAnimation(boltAnim)
 boltAnimRight.play()
            
 boltAnim = []
 for anim in ANIMATION_LEFT:
     boltAnim.append((anim, ANIMATION_DELAY))
-boltAnimLeft = pyganim.PygAnimation(boltAnim)
+boltAnimLeft = lib.pyganim.PygAnimation(boltAnim)
 boltAnimLeft.play()
         
 boltAnim = []
 for anim in ANIMATION_STAY:
     boltAnim.append((anim, ANIMATION_DELAY * 3))
-boltAnimStay = pyganim.PygAnimation(boltAnim)
+boltAnimStay = lib.pyganim.PygAnimation(boltAnim)
 boltAnimStay.play()
                 
-boltAnimJump = pyganim.PygAnimation(ANIMATION_JUMP)
+boltAnimJump = lib.pyganim.PygAnimation(ANIMATION_JUMP)
 boltAnimJump.play()

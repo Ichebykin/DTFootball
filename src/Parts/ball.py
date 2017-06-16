@@ -1,6 +1,6 @@
 import numpy as np
 from pygame import image, sprite, Rect
-from physics import Physics
+import lib
 
 radius = 10
 
@@ -14,8 +14,8 @@ class Ball(sprite.Sprite):
         
     def update(self, display):
         size = display.get_size()
-        self.r += Physics.calc_dr(self.v)
-        self.v += Physics.calc_dv(self.v)
+        self.r += lib.Physics.calc_dr(self.v)
+        self.v += lib.Physics.calc_dv(self.v)
         self.collide(size)
         self.rect.x = self.r[0]
         self.rect.y = self.r[1]
