@@ -40,6 +40,7 @@ class Game:
 
 			self.scene.start(self.__display, self.__manager)  # Инициализируем сцену, даем ей холст для рисования и ResManager.
 			while not self.scene.is_end():
+				
 				self.scene.loop(dt)
 				pygame.display.flip()
 				dt = clock.tick(self.fps)

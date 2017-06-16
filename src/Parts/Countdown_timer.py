@@ -7,8 +7,8 @@ class Countdown_timer(sprite.Sprite):
 		self.Match = Match
 		self.font = pygame.font.Font(None, 25)
 
-	def update(self, display):
+	def update(self, display,currentTime):
 		size = display.get_size()
-		self.text = self.font.render("Время до конца матча %d " % ((self.Match - pygame.time.get_ticks())//1000), True, [0, 0, 0])
+		self.text = self.font.render("Время до конца матча %d " % ((self.Match - currentTime)//1000), True, [0, 0, 0])
 		display.blit(self.text, [575, 0])
 	
