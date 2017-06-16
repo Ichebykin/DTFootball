@@ -6,7 +6,8 @@ from pygame import image
 from physics import Physics
 import copy
 from Effects.cloud import Cloud_effect
-
+from Parts.Scoreboard import Scoreboard
+from Parts.Countdown_timer import Countdown_timer
 
 WIN_WIDTH = 800
 WIN_HEIGHT = 400 
@@ -24,15 +25,36 @@ right2 = False
 left2 = False
 kick1 = False
 kick2 = False
-ball = Ball([400., 200.], [ 0., 0.])
-player1 = Player([450., 280.], 1)
-player2 = Player([20, 280.], 1)
+
+Match = 60000 * 1 # 1 minute in milliseconds
+
+countdown_timer = Countdown_timer(Match)
+
+Startpoint_Ball = [400., 200.]
+
+ball = Ball(Startpoint_Ball, [ 0., 0.])
+
+
+
+Startpoint_player_team1 = [450., 280.]
+
+player1 = Player(Startpoint_player_team1, 1)
+
+
+
+Startpoint_player_team2 = [20., 280.]
+
+player2 = Player(Startpoint_player_team2, 1)
+
+scoreboard = Scoreboard([0, 0])
 
 cloud_effect1 = Cloud_effect([400., 200.])
 cloud_effect2 = Cloud_effect([400., 200.])
 cloud_effect3 = Cloud_effect([400., 200.])
 
-while True:
+
+
+while pygame.time.get_ticks()<=Match:
     for e in pygame.event.get():
         if e.type == 12:  # exit button
             pygame.display.quit()
@@ -65,7 +87,21 @@ while True:
             kick2 = True
         if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
             kick1 = True 
-    
+    if ball.r[0] <= 45 and ball.r[1]>=190:
+        scoreboard.goal_team2()
+        ball = Ball(Startpoint_Ball, [ 0., 0.])
+        player1.r = Startpoint_player_team1
+        player2.r = Startpoint_player_team2
+        pygame.time.delay(1000)
+
+
+    if ball.r[0] >= 744 and ball.r[1]>=190:
+        scoreboard.goal_team1()
+        ball = Ball(Startpoint_Ball, [ 0., 0.])
+        player1.r = Startpoint_player_team1
+        player2.r = Startpoint_player_team2
+        pygame.time.delay(1000)
+
     display.blit(bg_image, (0, 0))
 
     cloud_effect1.update(display)
@@ -90,6 +126,11 @@ while True:
     if kick2:
         player2.kick(ball)    
     kick1 = False
-    kick2 = False         
+    kick2 = False
+
+    scoreboard.update(display)
+    countdown_timer.update(display)
+
     clock.tick(120)
+    print(pygame.time.get_ticks())
     pygame.display.update()
