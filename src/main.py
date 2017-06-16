@@ -93,15 +93,6 @@ class HidePresentScene(PresentScene):
 
 class PresentDFScene(lib.Scene):
 	def _start(self):
-# 		self.sprite = self.manager.get_image('PresentDF.png')
-# 		self.sprite2 = self.manager.get_image('download10.png')
-# 		self.sprite3 = self.manager.get_image('download20.png')
-# 		self.sprite4 = self.manager.get_image('download50.png')
-# 		self.sprite5 = self.manager.get_image('download70.png')
-# 		self.sprite6 = self.manager.get_image('download90.png')
-# 		self.sprite7 = self.manager.get_image('download100.png')
-		#self.football = lib.Transparent(3000)
-		#self.football.start()
 		self.t = 0
 		anim = lib.Animation('loadbar')
 		self.load = anim.get_loadbar_animation()
@@ -198,8 +189,8 @@ class MenuScene(lib.Scene):
 	def _start(self):
 		self.sprite = self.manager.get_image('PresentDF.png')
 		self.sprite2 = self.manager.get_image('aboutGame.png')
-		self.football = lib.Transparent(3000)
-		self.football.start()
+		#self.football = lib.Transparent(3000)
+		#self.football.start()
 		self.menu = Menu((330, 200))
 		font = pygame.font.SysFont("Monospace", 40, bold=False, italic=False)
 		font_bold = pygame.font.SysFont("Monospace", 40, bold=True, italic=False)
@@ -228,8 +219,8 @@ class MenuScene(lib.Scene):
 
 	def _draw(self, dt):
 		self.display.fill((255, 255, 255))
+		self.display.blit(self.sprite,(0,0))
 		self.menu.draw(self.display)
-		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(), self.sprite.get_rect()))
 
 if __name__ == '__main__':
 	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000, MenuScene())))))))))))
