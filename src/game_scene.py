@@ -1,0 +1,97 @@
+import pygame
+from pygame import image
+from physics import Physics
+import copy
+import Effects
+import Parts
+import lib
+
+bg_image = image.load('../data/image/field.jpg')
+up1 = False
+right1 = False
+left1 = False
+kick1 = False
+move1 = [up1,right1,left1,kick1]
+zeroMove = [False,False,False,False]
+up2 = False
+right2 = False
+left2 = False
+kick2 = False
+move2 = [up2,right2,left2,kick2]
+
+Match = 60000 * 1.5  # 1 minute in milliseconds
+countdown_timer = Parts.Countdown_timer(Match)
+Startpoint_Ball = [400., 200.]
+Startpoint_player_team1 = [780., 280.]
+Startpoint_player_team2 = [20., 280.]
+
+ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
+player1 = Parts.Player(Startpoint_player_team1, 1)
+player2 = Parts.Player(Startpoint_player_team2, 2)
+scoreboard = Parts.Scoreboard([0, 0])
+
+cloud_effect1 = Effects.Cloud_effect([400., 200.])
+cloud_effect2 = Effects.Cloud_effect([400., 200.])
+cloud_effect3 = Effects.Cloud_effect([400., 200.])
+class GameScene(lib.Scene):
+	def _event(self, event):
+		global move1
+		global move2
+	
+		for e in event.get():
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_UP:
+				move1[0] = True
+			if e.type == pygame.KEYUP and e.key == pygame.K_UP:
+				move1[0]= False
+					
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_RIGHT:
+				move1[1] = True
+			if e.type == pygame.KEYUP and e.key == pygame.K_RIGHT:
+				move1[1] = False
+					
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_LEFT:
+				move1[2] = True
+			if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
+				move1[2] = False
+					
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_LSHIFT:
+				move2[3] = True
+				
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_w:
+				move2[0] = True	
+			if e.type == pygame.KEYUP and e.key == pygame.K_w:
+				move2[0] = False			
+			
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_d:
+				move2[1] = True	
+			if e.type == pygame.KEYUP and e.key == pygame.K_d:
+				move2[1] = False	
+			
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
+				move2[2] = True	
+			if e.type == pygame.KEYUP and e.key == pygame.K_a:
+				move2[2] = False  
+			
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
+				move1[3] = True
+
+	def _update(self,dt):
+		
+		self.display.fill((255, 255, 255))
+		self.display.blit(bg_image, (0, 0))
+		ball.update(self.display)
+		player1.update(move1, self.display)
+		player2.update(move2, self.display)
+		scoreboard.update(self.display)
+		countdown_timer.update(self.display)
+		if pygame.sprite.collide_rect(ball, player1):
+			Physics.interact(ball, player1)
+		if pygame.sprite.collide_rect(ball, player2):
+			Physics.interact(ball, player2)
+		if move1[3]:
+			player1.kick(ball)
+		if move2[3]:
+			player2.kick(ball)	
+		move1[3] = False
+		move2[3] = False	
+	

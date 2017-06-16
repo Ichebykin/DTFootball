@@ -66,7 +66,6 @@ class Player(sprite.Sprite):
     def kick(self,ball):
         if la.norm(self.r - ball.r)< 30:
             v_x = -300
-            print(self.r[0] - ball.r[0])
             if (self.r[0] - ball.r[0])<0:
                 v_x = - v_x
             ball.v = ball.v + np.array([v_x, -300.])                
