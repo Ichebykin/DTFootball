@@ -92,7 +92,6 @@ class GameScene(lib.Scene):
 		
 		self.display.fill((255, 255, 255))
 		self.display.blit(bg_image, (0, 0))
-		self.ball.update(self.display)
 		self.player1.update(move1, self.display)
 		self.player2.update(move2, self.display)
 		self.scoreboard.update(self.display)
@@ -100,6 +99,10 @@ class GameScene(lib.Scene):
 		cloud_effect3.r = copy.copy(cloud_effect2.r)
 		cloud_effect2.r = copy.copy(cloud_effect1.r)
 		cloud_effect1.r = copy.copy(self.ball.r)
+		cloud_effect1.update(self.display)
+		cloud_effect2.update(self.display)
+		cloud_effect3.update(self.display)
+		self.ball.update(self.display)
 		if pygame.sprite.collide_rect(self.ball, self.player1):
 			Physics.interact(self.ball, self.player1)
 		if pygame.sprite.collide_rect(self.ball, self.player2):
