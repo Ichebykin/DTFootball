@@ -1,10 +1,13 @@
 import lib.pyganim
 
 class Animation:
-	def __init__(self,pl_type):
-		self.icon_dir = '../data/image/boy1'
-		if pl_type == 1:
+	def __init__(self,anim_type):
+		if anim_type == 'player2':
+			self.icon_dir = '../data/image/boy1'
+		if anim_type == 'player1':
 			self.icon_dir = '../data/image/boy2'
+		if anim_type == 'loadbar':
+			self.icon_dir = '../data/image/loadbar'	
 	def get_right_animation(self):
 		ANIMATION_DELAY = 0.1
 		ANIMATION_RIGHT = [('%s/frame-r1.png' % self.icon_dir),
@@ -47,4 +50,18 @@ class Animation:
 			boltAnim.append((anim, ANIMATION_DELAY * 3))
 		boltAnimStay = lib.pyganim.PygAnimation(boltAnim)
 		boltAnimStay.play()
-		return boltAnimStay
+		return boltAnimStay	
+	def get_loadbar_animation(self):
+		ANIMATION_DELAY = 1
+		load = [('%s/10.png' % self.icon_dir),
+					('%s/20.png' % self.icon_dir),
+					('%s/50.png' % self.icon_dir),
+					('%s/70.png' % self.icon_dir),
+					('%s/90.png' % self.icon_dir)]
+		boltAnim = []
+		for anim in load:
+			boltAnim.append((anim, ANIMATION_DELAY))
+		loadAnim = lib.pyganim.PygAnimation(boltAnim)
+		loadAnim.play()
+		return loadAnim
+		

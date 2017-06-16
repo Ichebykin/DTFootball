@@ -25,14 +25,13 @@ Startpoint_Ball = [400., 200.]
 Startpoint_player_team1 = [780., 280.]
 Startpoint_player_team2 = [20., 280.]
 
-
 cloud_effect1 = Effects.Cloud_effect([400., 200.])
 cloud_effect2 = Effects.Cloud_effect([400., 200.])
 cloud_effect3 = Effects.Cloud_effect([400., 200.])
 class GameScene(lib.Scene):
 	ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
-	player1 = Parts.Player(Startpoint_player_team1, 1)
-	player2 = Parts.Player(Startpoint_player_team2, 2)
+	player1 = Parts.Player(Startpoint_player_team1, 'player1')
+	player2 = Parts.Player(Startpoint_player_team2, 'player2')
 	scoreboard = Parts.Scoreboard([0, 0])
 	def _event(self, event):
 		global move1
