@@ -87,8 +87,6 @@ while pygame.time.get_ticks()<=Match:
             kick2 = True
         if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
             kick1 = True 
-
-
     if ball.r[0] <= 45 and ball.r[1]>=190:
         scoreboard.goal_team2()
         ball = Ball(Startpoint_Ball, [ 0., 0.])
