@@ -1,6 +1,6 @@
 import pygame
-from pygame import sprite, Rect, font
-
+from pygame import sprite
+pygame.init()
 class Countdown_timer(sprite.Sprite):
 	def __init__(self, Match):
 		sprite.Sprite.__init__(self)

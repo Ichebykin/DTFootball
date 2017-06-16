@@ -1,5 +1,5 @@
 import pygame
-from pygame import sprite, Rect, font
+from pygame import sprite
 
 class Scoreboard(sprite.Sprite):
 	"""docstring for Scoreboard"""
@@ -15,7 +15,7 @@ class Scoreboard(sprite.Sprite):
 		self.goalcounter[1] += 1
 
 	def update(self,display):
-		size = display.get_size()
+		#size = display.get_size()
 		self.text = self.font.render("Счет: %i - %i" % (self.goalcounter[0], self.goalcounter[1]), True, [0, 0, 0])
 		display.blit(self.text, [0, 0])
 		

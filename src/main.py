@@ -1,19 +1,8 @@
-#import sys
-#sys.path.append("C:\\Users\\Тимур\\Desktop\\игра\\data\\music")
-import time
 import pygame
 import lib
+from game_scene import GameScene
 
 pygame.init()
-#pygame.mixer.music.load('Wavin_Flag.mp3')
-#pygame.mixer.music.play()
-#while pygame.mixer.music.get_busy():
-#    pass
-
-#song = pygame.mixer.Sound('Wavin_Flag.mp3')
-#song.play()
-#while song.get_busy():
-#    pass
 
 def play_music(music_file):
 	try:
@@ -23,11 +12,8 @@ def play_music(music_file):
 		print("error music")
 		return
 	pygame.mixer.music.play(0)
-	# while pygame.mixer.music.get_busy():
-	#     print("playing")
-	#     pass
 
-play_music('../data/music/Wavin Flag.mp3')
+#play_music('../data/music/Wavin Flag.mp3')
 
 def get_center(surface, sprite):
 	return(surface.w/2 - sprite.w/2, surface.h/2 - sprite.h/2)
@@ -173,7 +159,7 @@ class Menu:
 
 class AboutScene(lib.Scene):
 	def _start(self):
-		self.sprite = self.manager.get_image('aboutScene.png')
+		self.sprite = self.manager.get_image('aboutGame.png')
 		self.football = lib.Transparent(3000)
 		self.football.start()
 
@@ -197,9 +183,11 @@ class MenuScene(lib.Scene):
 	def item_call(self):
 		print("item_call")
 		self.the_end()
-
+	def game_call(self):
+		self.set_next_scene(GameScene(MenuScene()))
+		self.the_end()
 	def about_call(self):
-		self.set_next_scene(AboutScene())
+		self.set_next_scene(AboutScene(MenuScene()))
 		self.the_end()
 
 	def _start(self):
@@ -213,12 +201,8 @@ class MenuScene(lib.Scene):
 		item = u"Один игрок"
 		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
 								font_bold.render(item,True,(0,0,0)),
-								self.item_call)
+								self.game_call)
 		item = u"Мультиплеер"
-		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
-								font_bold.render(item,True,(0,0,0)),
-								self.item_call)
-		item = u"Настройки"
 		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
 								font_bold.render(item,True,(0,0,0)),
 								self.item_call)
@@ -248,7 +232,7 @@ class MenuScene(lib.Scene):
 
 if __name__ == '__main__':
 	#scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000,MenuScene())))))))))))
-	scene = WaitScene(1000, ShowScene())
-	game = lib.Game(640, 480, scene=scene)
+	scene = GameScene()
+	game = lib.Game(800, 400, scene=scene)
 	game.set_caption("Dream Football", "icon2.png")
 	game.game_loop()

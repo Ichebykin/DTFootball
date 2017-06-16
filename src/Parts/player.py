@@ -21,28 +21,28 @@ class Player(sprite.Sprite):
         self.rect = Rect(r[0], r[1], WIDTH, HEIGHT)
         self.onGround = True
         
-    def update(self, left, right, up, display):
+    def update(self, move, display):
         
-        if up:
+        if move[0]:
             if self.onGround:
                 self.v[1] = -JUMP_POWER
                 self.onGround = False
             self.image.fill(Color(COLOR))
             boltAnimJump.blit(self.image, (0, 0))    
         
-        if left:
+        if move[2]:
             self.v[0] = -MOVE_SPEED
             self.image.fill(Color(COLOR))
             boltAnimLeft.blit(self.image, (0, 0))
         
-        if right:
+        if move[1]:
             self.v[0] = MOVE_SPEED
             self.image.fill(Color(COLOR))
             boltAnimRight.blit(self.image, (0, 0))
             
-        if not(left or right):
+        if not(move[1] or move[2]):
             self.v[0] = 0
-            if not up:
+            if not move[0]:
                 self.image.fill(Color(COLOR))
                 boltAnimStay.blit(self.image, (0, 0))
         
