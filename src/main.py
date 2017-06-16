@@ -13,7 +13,7 @@ def play_music(music_file):
 		return
 	pygame.mixer.music.play(0)
 
-#play_music('../data/music/Wavin Flag.mp3')
+play_music('../data/music/Wavin Flag.mp3')
 
 def get_center(surface, sprite):
 	return(surface.w/2 - sprite.w/2, surface.h/2 - sprite.h/2)
@@ -198,19 +198,15 @@ class MenuScene(lib.Scene):
 		self.menu = Menu((330,200))
 		font      = pygame.font.SysFont("Monospace", 40, bold=False, italic=False)
 		font_bold = pygame.font.SysFont("Monospace", 40, bold=True, italic=False)
-		item = u"Один игрок"
+		item = "Мультиплеер"
 		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
 								font_bold.render(item,True,(0,0,0)),
 								self.game_call)
-		item = u"Мультиплеер"
-		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
-								font_bold.render(item,True,(0,0,0)),
-								self.item_call)
-		item = u"Об игре"
+		item = "Об игре"
 		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
 								font_bold.render(item,True,(0,0,0)),
 								self.about_call)
-		item = u"Выход"
+		item = "Выход"
 		self.menu.add_menu_item(font.render(item,True,(0,0,0)),
 								font_bold.render(item,True,(0,0,0)),
 								self.item_call)
@@ -231,8 +227,8 @@ class MenuScene(lib.Scene):
 		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(),self.sprite.get_rect()))
 
 if __name__ == '__main__':
-	#scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000,MenuScene())))))))))))
-	scene = GameScene()
+	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000,MenuScene())))))))))))
+	#scene = GameScene()
 	game = lib.Game(800, 400, scene=scene)
 	game.set_caption("Dream Football", "icon2.png")
 	game.game_loop()
