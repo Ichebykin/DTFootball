@@ -5,6 +5,7 @@ import copy
 import Effects
 import Parts
 import lib
+import Scenes.Aftermatch
 
 bg_image = image.load('../data/image/field.jpg')
 up1 = False
@@ -19,7 +20,7 @@ left2 = False
 kick2 = False
 move2 = [up2,right2,left2,kick2]
 
-Match = 60000 * 1.5  # 1 minute in milliseconds
+Match = 60000 * 1/60 # 1 minute in milliseconds
 countdown_timer = Parts.Countdown_timer(Match)
 Startpoint_Ball = [400., 200.]
 Startpoint_player_team1 = [780., 280.]
@@ -114,5 +115,4 @@ class GameScene(lib.Scene):
 		move2[3] = False
 		if pygame.time.get_ticks()>=Match:
 			self.__end = True
-			self.set_next_scene(None)
-	
+			self.set_next_scene(Scenes.Aftermatch.Aftermatch(GameScene()))
