@@ -23,7 +23,7 @@ class Player(sprite.Sprite):
 		self.right = anim.get_right_animation()
 		self.left = anim.get_left_animation()
 		self.stay = anim.get_stay_animation()
-	def update(self, move, display):
+	def update(self, move, display,dt):
 		
 		
 		if move[0]:
@@ -49,8 +49,8 @@ class Player(sprite.Sprite):
 				self.image.fill(Color(COLOR))
 				self.stay.blit(self.image, (0, 0))
 		
-		self.v += lib.Physics.calc_dv(self.v)
-		self.r += lib.Physics.calc_dr(self.v)
+		self.v += lib.Physics.calc_dv(self.v,dt)
+		self.r += lib.Physics.calc_dr(self.v,dt)
 		self.collide()  
 		self.rect.x = self.r[0]
 		self.rect.y = self.r[1]

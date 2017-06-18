@@ -82,6 +82,8 @@ class GameScene(lib.Scene):
 
 	def _update(self,dt):
 		self.t +=dt
+		print(dt)
+		_dt = dt/1000
 		if self.ball.r[0] <= 45 and self.ball.r[1] >= 190:
 			self.scoreboard.goal_team2()
 			self.ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
@@ -97,8 +99,8 @@ class GameScene(lib.Scene):
 		
 		self.display.fill((255, 255, 255))
 		self.display.blit(bg_image, (0, 0))
-		self.player1.update(move1, self.display)
-		self.player2.update(move2, self.display)
+		self.player1.update(move1, self.display,_dt)
+		self.player2.update(move2, self.display,_dt)
 		self.scoreboard.update(self.display)
 		countdown_timer.update(self.display,self.t)
 		cloud_effect3.r = copy.copy(cloud_effect2.r)
@@ -107,7 +109,7 @@ class GameScene(lib.Scene):
 		cloud_effect1.update(self.display)
 		cloud_effect2.update(self.display)
 		cloud_effect3.update(self.display)
-		self.ball.update(self.display)
+		self.ball.update(self.display,_dt)
 		if pygame.sprite.collide_rect(self.ball, self.player1):
 			lib.Physics.interact(self.ball, self.player1)
 		if pygame.sprite.collide_rect(self.ball, self.player2):
