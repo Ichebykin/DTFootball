@@ -93,33 +93,29 @@ class HidePresentScene(PresentScene):
 
 class PresentDFScene(lib.Scene):
 	def _start(self):
-		self.sprite = self.manager.get_image('PresentDF.png')
-		self.sprite2 = self.manager.get_image('download10.png')
-		self.sprite3 = self.manager.get_image('download20.png')
-		self.sprite4 = self.manager.get_image('download50.png')
-		self.sprite5 = self.manager.get_image('download70.png')
-		self.sprite6 = self.manager.get_image('download90.png')
-		self.sprite7 = self.manager.get_image('download100.png')
-		self.football = lib.Transparent(3000)
-		self.football.start()
+		self.t = 0
+		anim = lib.Animation('loadbar')
+		self.load = anim.get_loadbar_animation()
 
 	def _event(self, event):
 		for e in event.get():
 			if e.type == pygame.KEYDOWN:
 				self.the_end()
 				self.set_next_scene(MenuScene())
-
-		if not self.football.is_start():
+		if self.t>4500:
 			self.the_end()
-
+			self.set_next_scene(MenuScene())		
 	def _update(self, dt):
-		self.football.update(dt)
+		#self.football.update(dt)
+		pass
 
 	def _draw(self, dt):
 		self.display.fill((255, 255, 255))
-		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(), self.sprite.get_rect()))
+		self.load.blit(self.display, (250,200))
+		self.t +=dt
+# 		self.display.blit(self.load, (200,200))
 		# time.sleep(5)
-		self.display.blit(self.football.get_sprite(self.sprite2), get_center(self.display.get_rect(), self.sprite2.get_rect()))
+		#self.display.blit(self.football.get_sprite(self.sprite2), get_center(self.display.get_rect(), self.sprite2.get_rect()))
 
 class Menu:
 	def __init__(self, position=(0, 0), loop=True):
@@ -193,8 +189,8 @@ class MenuScene(lib.Scene):
 	def _start(self):
 		self.sprite = self.manager.get_image('PresentDF.png')
 		self.sprite2 = self.manager.get_image('aboutGame.png')
-		self.football = lib.Transparent(3000)
-		self.football.start()
+		#self.football = lib.Transparent(3000)
+		#self.football.start()
 		self.menu = Menu((330, 200))
 		font = pygame.font.SysFont("Monospace", 40, bold=False, italic=False)
 		font_bold = pygame.font.SysFont("Monospace", 40, bold=True, italic=False)
@@ -223,12 +219,12 @@ class MenuScene(lib.Scene):
 
 	def _draw(self, dt):
 		self.display.fill((255, 255, 255))
+		self.display.blit(self.sprite,(0,0))
 		self.menu.draw(self.display)
-		self.display.blit(self.football.get_sprite(self.sprite), get_center(self.display.get_rect(), self.sprite.get_rect()))
 
 if __name__ == '__main__':
-	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000, MenuScene())))))))))))
-	# scene = GameScene()
+	#scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000, MenuScene())))))))))))
+	scene = Scenes.GameScene()
 	game = lib.Game(800, 400, scene=scene)
 	game.set_caption("Dream Football", "icon2.png")
 	game.game_loop()

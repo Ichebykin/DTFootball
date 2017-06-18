@@ -20,21 +20,22 @@ left2 = False
 kick2 = False
 move2 = [up2,right2,left2,kick2]
 
-Match = 60000 * 1/60 # 1 minute in milliseconds
+Match = 60000 * 1.5 # 1 minute in milliseconds
 countdown_timer = Parts.Countdown_timer(Match)
 Startpoint_Ball = [400., 200.]
 Startpoint_player_team1 = [780., 280.]
 Startpoint_player_team2 = [20., 280.]
-
 
 cloud_effect1 = Effects.Cloud_effect([400., 200.])
 cloud_effect2 = Effects.Cloud_effect([400., 200.])
 cloud_effect3 = Effects.Cloud_effect([400., 200.])
 class GameScene(lib.Scene):
 	ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
-	player1 = Parts.Player(Startpoint_player_team1, 1)
-	player2 = Parts.Player(Startpoint_player_team2, 2)
+	player1 = Parts.Player(Startpoint_player_team1, 'player1')
+	player2 = Parts.Player(Startpoint_player_team2, 'player2')
 	scoreboard = Parts.Scoreboard([0, 0])
+	def _start(self):
+		self.t = 0
 	def _event(self, event):
 		global move1
 		global move2
@@ -75,34 +76,42 @@ class GameScene(lib.Scene):
 			
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_RSHIFT: 
 				move1[3] = True
+		if self.t>=Match-100:
+			print("That's all folks")
+			self.__end = True
+			self.the_end()
 
 	def _update(self,dt):
+		self.t +=dt
+		_dt = dt/1000#время для вычисления перемещения
 		if self.ball.r[0] <= 45 and self.ball.r[1] >= 190:
 			self.scoreboard.goal_team2()
 			self.ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
 			self.player1.r = Startpoint_player_team1
 			self.player2.r = Startpoint_player_team2
-			pygame.time.delay(1000)
+			pygame.time.delay(500)
+			_dt=0
 		if self.ball.r[0] >= 744 and self.ball.r[1] >= 190:
 			self.scoreboard.goal_team1()
 			self.ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
 			self.player1.r = Startpoint_player_team1
 			self.player2.r = Startpoint_player_team2
-			pygame.time.delay(1000)
+			pygame.time.delay(500)
+			_dt=0
 		
 		self.display.fill((255, 255, 255))
 		self.display.blit(bg_image, (0, 0))
-		self.player1.update(move1, self.display)
-		self.player2.update(move2, self.display)
+		self.player1.update(move1, self.display,_dt)
+		self.player2.update(move2, self.display,_dt)
 		self.scoreboard.update(self.display)
-		countdown_timer.update(self.display)
+		countdown_timer.update(self.display,self.t)
 		cloud_effect3.r = copy.copy(cloud_effect2.r)
 		cloud_effect2.r = copy.copy(cloud_effect1.r)
 		cloud_effect1.r = copy.copy(self.ball.r)
 		cloud_effect1.update(self.display)
 		cloud_effect2.update(self.display)
 		cloud_effect3.update(self.display)
-		self.ball.update(self.display)
+		self.ball.update(self.display,_dt)
 		if pygame.sprite.collide_rect(self.ball, self.player1):
 			lib.Physics.interact(self.ball, self.player1)
 		if pygame.sprite.collide_rect(self.ball, self.player2):
@@ -113,6 +122,3 @@ class GameScene(lib.Scene):
 			self.player2.kick(self.ball)	
 		move1[3] = False
 		move2[3] = False
-		if pygame.time.get_ticks()>=Match:
-			self.__end = True
-			self.set_next_scene(Scenes.Aftermatch.Aftermatch(GameScene()))
