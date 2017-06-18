@@ -82,20 +82,21 @@ class GameScene(lib.Scene):
 
 	def _update(self,dt):
 		self.t +=dt
-		print(dt)
-		_dt = dt/1000
+		_dt = dt/1000#время для вычисления перемещения
 		if self.ball.r[0] <= 45 and self.ball.r[1] >= 190:
 			self.scoreboard.goal_team2()
 			self.ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
 			self.player1.r = Startpoint_player_team1
 			self.player2.r = Startpoint_player_team2
-			pygame.time.delay(1000)
+			pygame.time.delay(500)
+			_dt=0
 		if self.ball.r[0] >= 744 and self.ball.r[1] >= 190:
 			self.scoreboard.goal_team1()
 			self.ball = Parts.Ball(Startpoint_Ball, [ 0., 0.])
 			self.player1.r = Startpoint_player_team1
 			self.player2.r = Startpoint_player_team2
-			pygame.time.delay(1000)
+			pygame.time.delay(500)
+			_dt=0
 		
 		self.display.fill((255, 255, 255))
 		self.display.blit(bg_image, (0, 0))

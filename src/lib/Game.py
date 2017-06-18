@@ -6,7 +6,7 @@ class Game:
 				 width=640,  # ширина и высота окна,
 				 height=480,
 				 color=(255, 255, 255),  # цвет которым будет залит нарисованный экран,
-				 fps=120, # максимальный fps
+				 fps=60, # максимальный fps
 				 scene=None,
 				 manager=ResManager()):
 		pygame.init()
