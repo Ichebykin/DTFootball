@@ -6,7 +6,7 @@ class Game:
 				 width=640,  # ширина и высота окна,
 				 height=480,
 				 color=(255, 255, 255),  # цвет которым будет залит нарисованный экран,
-				 fps=120, # максимальный fps
+				 fps=60, # максимальный fps
 				 scene=None,
 				 manager=ResManager()):
 		#pygame.init()
@@ -40,6 +40,7 @@ class Game:
 
 			self.scene.start(self.__display, self.__manager)  # Инициализируем сцену, даем ей холст для рисования и ResManager.
 			while not self.scene.is_end():
+				
 				self.scene.loop(dt)
 				pygame.display.flip()
 				dt = clock.tick(self.fps)

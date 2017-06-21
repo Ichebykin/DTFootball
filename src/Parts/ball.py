@@ -12,10 +12,10 @@ class Ball(sprite.Sprite):
         self.image = image.load('../data/image/mach.png')
         self.rect = Rect(r[0], r[1], 20, 20)
         
-    def update(self, display):
+    def update(self, display,dt):
         size = display.get_size()
-        self.r += lib.Physics.calc_dr(self.v)
-        self.v += lib.Physics.calc_dv(self.v)
+        self.r += lib.Physics.calc_dr(self.v,dt)
+        self.v += lib.Physics.calc_dv(self.v,dt)
         self.collide(size)
         self.rect.x = self.r[0]
         self.rect.y = self.r[1]
