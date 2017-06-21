@@ -1,12 +1,13 @@
 import pygame
-from pygame import sprite
+from pygame import sprite 
 
 class Scoreboard(sprite.Sprite):
 	"""docstring for Scoreboard"""
 	def __init__(self, goalcounter):
 		sprite.Sprite.__init__(self)
 		self.goalcounter = goalcounter
-		self.font = pygame.font.Font(None, 25)
+		#self.font = pygame.font.Font(None, 25)
+		self.font = pygame.font.SysFont("Monospace", 20, bold=False, italic=False)
 
 	def goal_team1(self):
 		self.goalcounter[0] += 1
