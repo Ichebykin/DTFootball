@@ -9,7 +9,7 @@ class Animation:
 		if anim_type == 'loadbar':
 			self.icon_dir = '../data/image/loadbar'	
 	def get_right_animation(self):
-		ANIMATION_DELAY = 0.1
+		ANIMATION_DELAY = 0.05
 		ANIMATION_RIGHT = [('%s/frame-r1.png' % self.icon_dir),
 					('%s/frame-r2.png' % self.icon_dir),
 					('%s/frame-r3.png' % self.icon_dir),
@@ -23,7 +23,7 @@ class Animation:
 		boltAnimRight.play()
 		return boltAnimRight
 	def get_left_animation(self):
-		ANIMATION_DELAY = 0.1
+		ANIMATION_DELAY = 0.05
 		ANIMATION_LEFT = [('%s/frame-l1.png' % self.icon_dir),
 					('%s/frame-l2.png' % self.icon_dir),
 					('%s/frame-l3.png' % self.icon_dir),
