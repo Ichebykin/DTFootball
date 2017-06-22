@@ -224,8 +224,8 @@ class MenuScene(lib.Scene):
 		self.menu.draw(self.display)
 
 if __name__ == '__main__':
-	#scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000, MenuScene())))))))))))
-	scene = Scenes.GameScene()
+	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000, MenuScene())))))))))))
+	#scene = Scenes.GameScene()
 	game = lib.Game(800, 400, scene=scene)
 	game.set_caption("Dream Football", "icon2.png")
 	game.game_loop()
