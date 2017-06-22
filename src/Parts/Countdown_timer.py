@@ -10,11 +10,6 @@ class Countdown_timer(sprite.Sprite):
 
 	def update(self, display,currentTime):
 		size = display.get_size()
-<<<<<<< HEAD
-		self.text = self.font.render("Время до конца матча %d " % ((self.Match - pygame.time.get_ticks())//1000), True, [0, 0, 0])
-		display.blit(self.text, [450, 0])
-=======
 		self.text = self.font.render("Время до конца матча %d " % ((self.Match - currentTime)//1000), True, [0, 0, 0])
-		display.blit(self.text, [575, 0])
->>>>>>> 7e47ea8939c68a3bb028690c6aafd12f93101bb0
+		display.blit(self.text, [510, 0])
 	
