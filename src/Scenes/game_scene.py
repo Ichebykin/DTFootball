@@ -5,6 +5,7 @@ import copy
 import Effects
 import Parts
 import lib
+import Scenes.Aftermatch
 
 bg_image = image.load('../data/image/field.jpg')
 up1 = False
@@ -121,4 +122,3 @@ class GameScene(lib.Scene):
 			self.player2.kick(self.ball)	
 		move1[3] = False
 		move2[3] = False
-		
