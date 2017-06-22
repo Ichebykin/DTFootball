@@ -9,7 +9,7 @@ class Game:
 				 fps=60, # максимальный fps
 				 scene=None,
 				 manager=ResManager()):
-		pygame.init()
+		#pygame.init()
 
 		self.set_display(width, height)
 
