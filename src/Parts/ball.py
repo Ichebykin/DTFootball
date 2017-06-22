@@ -36,4 +36,4 @@ class Ball(sprite.Sprite):
             self.r[0] = 0     
         
     def drawTrace(self, display):
-        return 
+        pass 

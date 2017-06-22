@@ -5,7 +5,7 @@ import Scenes
 pygame.init()
 
 def play_music(music_file):
-	try:
+	try:  
 		pygame.mixer.music.load(music_file)
 
 	except pygame.error:
@@ -163,10 +163,10 @@ class AboutScene(lib.Scene):
 		for e in event.get():
 			if e.type == pygame.KEYDOWN:
 				self.the_end()
-				self.set_next_scene(PresentDFScene())
+				self.set_next_scene(MenuScene())
 
-		if not self.football.is_start():
-			self.the_end()
+		#if not self.football.is_start():
+			#self.the_end()
 
 	def _update(self, dt):
 		self.football.update(dt)
@@ -177,9 +177,10 @@ class AboutScene(lib.Scene):
 
 class MenuScene(lib.Scene):
 	def item_call(self):
-		print("item_call")
+		#print("item_call")
 		self.the_end()
 	def game_call(self):
+		pygame.mixer.music.stop()
 		self.set_next_scene(Scenes.GameScene(MenuScene()))
 		self.the_end()
 	def about_call(self):
@@ -223,8 +224,8 @@ class MenuScene(lib.Scene):
 		self.menu.draw(self.display)
 
 if __name__ == '__main__':
-	#scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000, MenuScene())))))))))))
-	scene = Scenes.GameScene()
+	scene = WaitScene(1000, ShowScene(WaitScene(500, HideScene(WaitScene(1000, PresentScene(WaitScene(500, HidePresentScene(WaitScene(1000, PresentDFScene(WaitScene(1000, MenuScene())))))))))))
+	#scene = Scenes.GameScene()
 	game = lib.Game(800, 400, scene=scene)
 	game.set_caption("Dream Football", "icon2.png")
 	game.game_loop()
